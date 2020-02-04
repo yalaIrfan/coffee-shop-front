@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">CoF</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" *ngIf="!this.token.isLoggedIn; else loggedIn">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/allReviews" routerLinkActive="active">All reviews <span
+            class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign up </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active">Log in</a>
+      </li>
+    </ul>
+    <ng-template #loggedIn>
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/allReviews" routerLinkActive="active">All reviews <span
+              class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/allReviews/2" routerLinkActive="active">My reviews </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/addReview" routerLinkActive="active">Add review</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()" routerLinkActive="active">Log out</a>
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+</nav>
+
+
+<div class="container">
+
+  <router-outlet></router-outlet>
+
+</div>

@@ -1,0 +1,76 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first" style="padding: 1.5%">
+
+            <button disabled class="btn btn-dark"><span class="glyphicon glyphicon-user" aria-hidden="true">
+                    Add review
+                </span></button>
+        </div>
+
+        <!-- Login Form -->
+        <form [formGroup]='rForm' (ngSubmit)="addReview(rForm.value)">
+            <input formControlName="name" type="text" id="name" class="fadeIn second" 
+                placeholder="name">
+            <div *ngIf="rForm.controls['name'].touched && rForm.controls['name'].invalid">
+                <div *ngIf="rForm.get('name').hasError('required')">
+                    <span>
+                        <div class="fieldError"> Please enter a name. </div>
+                    </span>
+                </div>
+                <div *ngIf="rForm.get('name').hasError('minlength')">
+                    <span>
+                        <div class="fieldError"> name must be at least 5 characters long. </div>
+                    </span>
+                </div>
+            </div>
+            <input formControlName="comments" type="text" id="comments" class="fadeIn third" 
+              placeholder="comments">
+            <div *ngIf="rForm.controls['comments'].touched && rForm.controls['comments'].invalid">
+                <div *ngIf="rForm.get('comments').hasError('required')">
+                    <span>
+                        <div class="fieldError"> Please enter  comment. </div>
+                    </span>
+                </div>
+                <div *ngIf="rForm.get('comments').hasError('minlength')">
+                    <span>
+                        <div class="fieldError"> comment must be at least 5 characters long. </div>
+                    </span>
+                </div>
+            </div>
+            <div class="fadeIn forth">
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                    </span>
+                </ng-template>
+
+                <ngb-rating [(rate)]="currentRate" formControlName="rating"  [starTemplate]="t" max="5"></ngb-rating>
+                <div *ngIf="rForm.controls['rating'].touched && rForm.controls['rating'].invalid">
+                    <div *ngIf="rForm.get('rating').hasError('required')">
+                        <span>
+                            <div class="fieldError"> Please select rating. </div>
+                        </span>
+                    </div>
+                   
+                </div>
+            </div>
+            <input type="submit" class="fadeIn fourth" value="Submit">
+        </form>
+
+        <!-- Remind Passowrd -->
+      
+
+    </div>
+</div>
+
+<!-- 
+  <ng-template #t let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+      <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+    </span>
+</ng-template>
+
+<ngb-rating [(rate)]="currentRate" [starTemplate]="t"  max="5"></ngb-rating> -->

@@ -1,0 +1,19 @@
+<h3 >Coffee shop reviews</h3>
+<table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        
+        <th scope="col">Name </th>
+        <th scope="col">Comments</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let review of reviews">
+         
+        <td>{{review.coffeeShopId}}</td>
+        <td>{{review.comments}}</td>
+        <td>{{review.rating}}</td>
+      </tr>
+    </tbody>
+  </table>

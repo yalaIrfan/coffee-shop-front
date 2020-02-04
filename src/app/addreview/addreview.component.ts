@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReviewsService } from '../shared/services/reviews.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TokenService } from '../shared/services/token.service';
 
 // import { Review} 
 @Component({
@@ -11,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class AddreviewComponent implements OnInit {
   rForm: FormGroup;
 
-  constructor(private reviewService: ReviewsService,private fb: FormBuilder) { }
+  constructor(private reviewService: ReviewsService,private fb: FormBuilder,private token:TokenService) { }
   reviews: any[] = [];
   ngOnInit() {
     this.rForm = this.fb.group({
@@ -32,17 +33,20 @@ export class AddreviewComponent implements OnInit {
 
       ])]
     });
+    this.token.getToken()
   }
 
   addReview(){
     console.log(this.rForm.value)
+    console.log('user is '+window.sessionStorage.getItem('userId'))
     let rew ={
 
-      "rating": 1,
+      "rating": this.rForm.get('rating').value,
       "comments": this.rForm.get('name').value,
-      "coffeeShopId": 1,
-      "publisherId": 1
+      "coffeeShopId": 2,
+      "publisherId": this.token.userId
      }
+
     this.reviewService.addReview(rew).then((review) => {
       this.rForm.reset()
     }).catch(err=>console.error(err))

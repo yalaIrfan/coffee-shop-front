@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.rForm.valid) {
       this.userService.login(this.rForm.value).then((res) => {
-        this.token.setToken(res['id'])
+        this.token.setToken(res)
+        // window.sessionStorage.setItem('userId',res['userId'])
         this.rForm.reset();
         this.route.navigate(['/allReviews'])
         console.log(this.token.isLoggedIn)

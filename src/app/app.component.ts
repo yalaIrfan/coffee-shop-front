@@ -14,11 +14,13 @@ export class AppComponent {
   constructor(private token: TokenService, private user: UserService, public route: Router) {
 
   }
-
+  userId=''
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.token.getToken()
+    console.log(this.token.userId)
+    
   }
   //call service to load the static an init app
   logout() {

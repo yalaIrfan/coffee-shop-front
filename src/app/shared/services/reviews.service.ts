@@ -28,6 +28,7 @@ export class ReviewsService {
     }
 
     addReview(review){
+        console.log(review)
         return this.http.post(`http://localhost:3000/api/Reviews?access_token=${this.authToken}`,review).toPromise();
     }
 

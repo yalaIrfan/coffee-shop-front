@@ -24,7 +24,7 @@ export class AppComponent {
   }
   //call service to load the static an init app
   logout() {
-    this.user.logout(window.sessionStorage.getItem('auth_token')).then((res) => {
+    this.user.logout(sessionStorage.getItem('auth_token')).then((res) => {
       // window.sessionStorage.removeItem('auth_token')
        this.token.removeItem()
        this.route.navigate(['/'])

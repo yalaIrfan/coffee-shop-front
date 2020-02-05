@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AllReviewsComponent } from './all-reviews/all-reviews.component';
@@ -15,7 +14,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuardService } from './shared/auth-guard.service';
 import { TokenService } from './shared/services/token.service';
 import { AuthService } from './shared/services/auth.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './shared/jwt.interceptor';
+
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     ReactiveFormsModule,
     NgbModule
   ],
-  providers: [ReviewsService,UserService,AuthGuardService,TokenService,AuthService],
+  providers: [ReviewsService,UserService,AuthGuardService,TokenService,AuthService
+  ,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

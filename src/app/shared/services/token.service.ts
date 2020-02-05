@@ -7,11 +7,11 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 export class TokenService {
     public isLoggedIn: Boolean = false;
-    userId:string=''
+    userId: string = ''
     setToken(token) {
         return new Promise((resolve, reject) => {
             this.isLoggedIn = true;
-            this.userId =token['userId']
+            this.userId = token['userId']
             window.sessionStorage.setItem('userId', token['userId'])
             resolve(window.sessionStorage.setItem('auth_token', token['id']))
         })
@@ -22,7 +22,7 @@ export class TokenService {
         return new Promise((resolve, reject) => {
             if (window.sessionStorage.getItem('auth_token'))
                 this.isLoggedIn = true;
-                this.userId = window.sessionStorage.getItem('userId')
+            this.userId = window.sessionStorage.getItem('userId')
             resolve(window.sessionStorage.getItem('auth_token'))
 
         })
@@ -40,7 +40,7 @@ export class TokenService {
         if (window.sessionStorage.getItem('auth_token')) {
             window.sessionStorage.removeItem('auth_token')
             window.sessionStorage.removeItem('userId')
-
+            this.userId = ''
             this.isLoggedIn = false;
         }
     }

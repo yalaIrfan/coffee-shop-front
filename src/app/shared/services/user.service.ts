@@ -16,7 +16,7 @@ export class UserService {
 
 
   login(data): Promise<Object> {
-    return this.http.post(`http://localhost:3000/api/Reviewers/login?${this.authToken}`, data).toPromise()
+    return this.http.post(`http://localhost:3000/api/Reviewers/login`, data).toPromise()
   }
 
 
@@ -25,7 +25,7 @@ export class UserService {
   }
   logout(token) {
     this.authToken = token
-    return this.http.post(`http://localhost:3000/api/Reviewers/logout?access_token=${this.authToken}`, {}).toPromise()
+    return this.http.post(`http://localhost:3000/api/Reviewers/logout`, {}).toPromise()
 
   }
 } 

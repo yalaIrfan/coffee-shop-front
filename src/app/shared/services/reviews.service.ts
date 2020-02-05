@@ -20,16 +20,19 @@ export class ReviewsService {
         })
     };
 
-    // httpOptions.headers =        httpOptions.headers.set('Authorization', 'my-new-auth-token');
-
-    private authToken = 'cdEeAxdUkjgaJNUEUH8XYYAu3cnxHyOXtr8UE4I8zAYoGPCo9mDrAsq2JFFrGr8W'
     getAllreviews() {
-        return this.http.get(`http://localhost:3000/api/Reviews?${this.authToken}`).toPromise();
+        return this.http.get(`http://localhost:3000/api/Reviews`).toPromise();
     }
 
-    addReview(review){
-        console.log(review)
-        return this.http.post(`http://localhost:3000/api/Reviews?access_token=${this.authToken}`,review).toPromise();
+    addReview(review) {
+        return this.http.post(`http://localhost:3000/api/Reviews`, review).toPromise();
+    }
+
+    getMyReviews(publisherId) {
+        let query = { where : { 'publisherId': publisherId } }
+        let filter = (JSON.stringify(query))
+        let url = encodeURI(`http://localhost:3000/api/Reviews?filter=` + filter)
+        return this.http.get(url).toPromise();
     }
 
 }

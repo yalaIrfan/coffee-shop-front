@@ -42,7 +42,7 @@ export class AddreviewComponent implements OnInit {
     let rew ={
 
       "rating": this.rForm.get('rating').value,
-      "comments": this.rForm.get('name').value,
+      "comments": this.rForm.get('comments').value,
       "coffeeShopId": 2,
       "publisherId": this.token.userId
      }

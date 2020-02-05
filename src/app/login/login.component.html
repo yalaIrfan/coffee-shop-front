@@ -11,7 +11,7 @@
     </div>
 
     <!-- Login Form -->
-    <form [formGroup]='rForm' (ngSubmit)="login(rForm.value)">
+    <form [formGroup]='rForm' (ngSubmit)="login()">
       <input formControlName="email" type="text" id="login" class="fadeIn second" name="login" placeholder="login">
       <div *ngIf="rForm.controls['email'].touched && rForm.controls['email'].invalid">
         <div *ngIf="rForm.get('email').hasError('required')">

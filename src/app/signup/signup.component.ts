@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../shared/services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
@@ -12,7 +14,9 @@ export class SignupComponent implements OnInit {
     registerForm: FormGroup;
     submitted = false;
 
-    constructor(private formBuilder: FormBuilder, private userService: UserService,public route: Router) { }
+    constructor(private formBuilder: FormBuilder, 
+        private userService: UserService,public route: Router
+        ,private toastr: ToastrService) { }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
@@ -40,8 +44,12 @@ export class SignupComponent implements OnInit {
         }
         this.userService.signup(this.constuctRegObj(this.registerForm.value)).then((res) => {
             console.log('sucess')
+            this.toastr.success('User successfully registered.','Success')
             this.registerForm.reset();
             this.route.navigate(['/login'])
+        }).catch(err=>{
+            this.toastr.error('Oops! something went wrong while registering the user.','Failed')
+            console.error(err)
         })
         // display form values on success
         // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));

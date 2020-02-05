@@ -1,8 +1,9 @@
-<h3 >Coffee shop reviews</h3>
-<table class="table table-hover table-dark">
+<h3>Coffee shop reviews</h3>
+<div class="table-responsive" style="height: 50% auto;" *ngIf="reviews.length">
+  <!-- <table class="table table-hover table-dark ">
     <thead>
       <tr>
-        
+
         <th scope="col">Name </th>
         <th scope="col">Comments</th>
         <th scope="col">Rating</th>
@@ -10,10 +11,27 @@
     </thead>
     <tbody>
       <tr *ngFor="let review of reviews">
-         
+
         <td>{{review.coffeeShopId}}</td>
         <td>{{review.comments}}</td>
         <td>{{review.rating}}</td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+</div>
+<div class="row"  *ngIf="reviews.length">
+  <div *ngFor="let review of reviews" style="margin: 0.5%;align-self: auto;">
+    <div class="card text-white bg-{{review.batch}} mb-3" style="max-width: 18rem;max-height: 15rem;" >
+      <div class="card-header">Review for coffee shop {{review.coffeeShopId}}</div>
+      <div class="card-body">
+        <h5 class="card-title">Rating - {{review.rating}}</h5>
+        <p class="card-text">{{review.comments}}
+          content.</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="alert alert-warning" *ngIf="!reviews.length" role="alert">
+      Oh-Uh! No reviews found
+    </div>
+  </div>

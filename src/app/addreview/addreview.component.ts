@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReviewsService } from '../shared/services/reviews.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TokenService } from '../shared/services/token.service';
+import { ToastrService } from 'ngx-toastr';
 
 // import { Review} 
 @Component({
@@ -12,7 +13,7 @@ import { TokenService } from '../shared/services/token.service';
 export class AddreviewComponent implements OnInit {
   rForm: FormGroup;
 
-  constructor(private reviewService: ReviewsService,private fb: FormBuilder,private token:TokenService) { }
+  constructor(private reviewService: ReviewsService,private fb: FormBuilder,private token:TokenService,public toastr:ToastrService) { }
   reviews: any[] = [];
   ngOnInit() {
     this.rForm = this.fb.group({
@@ -37,8 +38,6 @@ export class AddreviewComponent implements OnInit {
   }
 
   addReview(){
-    console.log(this.rForm.value)
-    console.log('user is '+window.sessionStorage.getItem('userId'))
     let rew ={
 
       "rating": this.rForm.get('rating').value,
@@ -48,7 +47,11 @@ export class AddreviewComponent implements OnInit {
      }
 
     this.reviewService.addReview(rew).then((review) => {
+      this.toastr.success('Your review has been added successfully.','Success')
       this.rForm.reset()
-    }).catch(err=>console.error(err))
+    }).catch(err=>{
+      this.toastr.error('Oops! something went wrong unable to add review.','Failed')
+        console.error(err)
+    })
   }
 }

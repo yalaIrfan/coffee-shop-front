@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TokenService } from './shared/services/token.service';
 import { UserService } from './shared/services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'coffee-shop-front';
   // isLoggedIn: Boolean = false;
-  constructor(private token: TokenService, private user: UserService, public route: Router) {
+  constructor(public token: TokenService, private user: UserService, public route: Router,public toastr:ToastrService) {
 
   }
   userId=''
@@ -26,9 +27,13 @@ export class AppComponent {
   logout() {
     this.user.logout(sessionStorage.getItem('auth_token')).then((res) => {
       // window.sessionStorage.removeItem('auth_token')
+      this.toastr.success('User logged out.','Success')
        this.token.removeItem()
        this.route.navigate(['/'])
     })
-   .catch(err => { console.error(err) })
+    .catch(err=>{
+      this.toastr.error('Oops! something went wrong while logout.','Failed')
+      console.error(err)
+  })
   }
 }

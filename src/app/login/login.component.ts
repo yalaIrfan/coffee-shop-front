@@ -4,6 +4,7 @@ import { UserService } from '../shared/services/user.service';
 import { Router } from '@angular/router';
 import { TokenService } from '../shared/services/token.service';
 import { EventEmitter } from 'events';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +13,7 @@ import { EventEmitter } from 'events';
 export class LoginComponent implements OnInit {
   myevent: EventEmitter = new EventEmitter();
   constructor(private fb: FormBuilder,
-    private userService: UserService, private token: TokenService,
+    private userService: UserService, private token: TokenService,public toastr:ToastrService,
     public route: Router) { }
   rForm: FormGroup;
   ngOnInit() {
@@ -33,12 +34,16 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.rForm.valid) {
       this.userService.login(this.rForm.value).then((res) => {
+        this.toastr.success('User successfully logged in.','Success')
         this.token.setToken(res)
         // window.sessionStorage.setItem('userId',res['userId'])
         this.rForm.reset();
         this.route.navigate(['/allReviews'])
         console.log(this.token.isLoggedIn)
-      })
+      }).catch(err=>{
+        this.toastr.error('Oops! something went wrong while logging in.','Failed')
+        console.error(err)
+    })
     }
 
   }

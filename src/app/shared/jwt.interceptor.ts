@@ -5,7 +5,6 @@ import {
     HttpResponse,
     HttpHandler,
     HttpEvent,
-    HttpErrorResponse,
     HttpParams
 } from '@angular/common/http';
 

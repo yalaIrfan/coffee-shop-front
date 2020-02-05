@@ -11,7 +11,7 @@
         </div>
 
         <!-- Login Form -->
-        <form [formGroup]='rForm' (ngSubmit)="addReview(rForm.value)">
+        <form [formGroup]='rForm' (ngSubmit)="addReview()">
             <input formControlName="name" type="text" id="name" class="fadeIn second" 
                 placeholder="name">
             <div *ngIf="rForm.controls['name'].touched && rForm.controls['name'].invalid">
@@ -47,7 +47,7 @@
                     </span>
                 </ng-template>
 
-                <ngb-rating [(rate)]="currentRate" formControlName="rating"  [starTemplate]="t" max="5"></ngb-rating>
+                <ngb-rating formControlName="rating"  [starTemplate]="t" max="5"></ngb-rating>
                 <div *ngIf="rForm.controls['rating'].touched && rForm.controls['rating'].invalid">
                     <div *ngIf="rForm.get('rating').hasError('required')">
                         <span>

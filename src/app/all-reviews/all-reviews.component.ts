@@ -19,13 +19,27 @@ export class AllReviewsComponent implements OnInit {
     if (!this.myId)
       this.reviewService.getAllreviews().then((reviews: any[]) => {
         this.reviews = reviews;
+        this.loadCards();
       })
     else
-    this.reviewService.getMyReviews(this.myId).then((reviews: any[]) => {
-      this.reviews = reviews;
+      this.reviewService.getMyReviews(this.myId).then((reviews: any[]) => {
+        this.reviews = reviews;
+        this.loadCards();
+
+      })
+
+  }
+  loadCards() {
+    let color = ['danger', 'warning', 'primary', 'info', 'success'];
+    this.reviews.forEach(rev => {
+      try{
+        rev['batch'] = color[rev.rating - 1];
+      }
+      catch (err) {
+        rev['batch'] = color[1];
+      }
     })
 
   }
-
 
 }

@@ -8,8 +8,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 export class ReviewsService {
 
-    //
-    private baseUrl = 'http://localhost:3000/api';
 
     constructor(private http: HttpClient) { }
 
@@ -21,17 +19,17 @@ export class ReviewsService {
     };
 
     getAllreviews() {
-        return this.http.get(`http://localhost:3000/api/Reviews`).toPromise();
+        return this.http.get(`api/Reviews`).toPromise();
     }
 
     addReview(review) {
-        return this.http.post(`http://localhost:3000/api/Reviews`, review).toPromise();
+        return this.http.post(`api/Reviews`, review).toPromise();
     }
 
     getMyReviews(publisherId) {
         let query = { where : { 'publisherId': publisherId } }
         let filter = (JSON.stringify(query))
-        let url = encodeURI(`http://localhost:3000/api/Reviews?filter=` + filter)
+        let url = encodeURI(`api/Reviews?filter=` + filter)
         return this.http.get(url).toPromise();
     }
 

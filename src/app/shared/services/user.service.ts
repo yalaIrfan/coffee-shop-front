@@ -22,7 +22,6 @@ export class UserService {
     return this.http.post(`api/Reviewers`, data).toPromise()
   }
   logout(token) {
-    this.authToken = token
     return this.http.post(`api/Reviewers/logout`, {}).toPromise()
 
   }

@@ -33,8 +33,8 @@ export class AllReviewsComponent implements OnInit {
     let color = ['danger', 'warning', 'primary', 'info', 'success'];
     this.reviews.forEach(rev => {
       try {
-        let rate = rev.rating ? rev.rating : 1;
-        rev['batch'] = color[rate - 1];
+        rev.rating = rev.rating ? rev.rating : 1;
+        rev['batch'] = color[rev.rating - 1];
       }
       catch (err) {
         rev['batch'] = color[1];

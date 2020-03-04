@@ -32,8 +32,9 @@ export class AllReviewsComponent implements OnInit {
   loadCards() {
     let color = ['danger', 'warning', 'primary', 'info', 'success'];
     this.reviews.forEach(rev => {
-      try{
-        rev['batch'] = color[rev.rating - 1];
+      try {
+        let rate = rev.rating ? rev.rating : 1;
+        rev['batch'] = color[rate - 1];
       }
       catch (err) {
         rev['batch'] = color[1];
